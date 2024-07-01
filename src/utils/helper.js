@@ -5,3 +5,11 @@ export const makeSum = (start, end) => {
     }
     return sum;
 }
+
+export const checkExecutionTime = async (fn, name) => {
+    const start = performance.now()
+    const res = await fn()
+    const time = performance.now() - start
+    console.log(`Execution time = ${name}`, time)
+    return res
+}

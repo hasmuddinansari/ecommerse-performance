@@ -6,9 +6,15 @@ import Navbar from './components/Navbar';
 import { Loading } from './components/loading/Loading';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    }
+  }
+})
 
-const Products = lazy(() => import('./components/Products'))
+const Products = lazy(() => import('./components/Products/Products'))
 
 
 const App = () => {

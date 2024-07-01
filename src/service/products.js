@@ -1,6 +1,6 @@
 // source: https://fakestoreapi.com/docs
 
-export const getProducts = (limit) => {
+export const getProducts = (limit = 20) => {
     return fetch(`https://fakestoreapi.com/products${limit ? `?limit=${limit}` : ''}`).then(res => res.json())
 }
 

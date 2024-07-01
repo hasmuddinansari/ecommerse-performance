@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../loading/Loading';
 import { getProducts } from '../../service/products';
-import { Product } from '../Product';
+import { Product } from '../Products/Product';
 import { useVisible } from '../hooks/useVisible';
 
 export const Section = ({ name }) => {
@@ -13,7 +13,7 @@ export const Section = ({ name }) => {
     const { loading, data: products } = useQuery({
         queryKey: ['products', name],
         queryFn: () => getProducts(6),
-        enabled: isVisible
+        enabled: isVisible,
     })
     return (
         <div className="my-4 w-100 h-100" ref={targetRef}>
