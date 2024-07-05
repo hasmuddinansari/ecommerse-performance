@@ -1,15 +1,28 @@
-// https://dev-9dcl41z3d4jprkf.api.raw-labs.com/product/data?name=Muffin
+import React, { useState, useMemo, useDeferredValue } from 'react';
+import { Col, Form, ListGroup, Row, Image } from 'react-bootstrap';
+import productsData from './data.json'
 
-import React, { useState, useEffect } from 'react';
-import { Form, Button, ListGroup } from 'react-bootstrap';
 
-const SearchProduct = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const [loading, setLoading] = useState(false);
 
-    const handleSearch = (event) => {
-        setSearchTerm(event.target.value);
+const products = [...Array(5).keys()].map((item) => productsData.concat(productsData)).flat(Infinity)
+
+const filterBy = (product, searchedBy) => {
+    const name = (product?.name || "").toLowerCase();
+    const search = (searchedBy || '').toLowerCase()
+    return name.includes(search)
+}
+
+function Search() {
+    const [searched, setSearched] = useState('');
+    const deferredValue = useDeferredValue(searched)
+
+    const productsList = useMemo(() => {
+        return products.filter((item) => filterBy(item, deferredValue))
+    }, [deferredValue]);
+
+    const handleChange = (e) => {
+        const { value } = e.target;
+        setSearched(value);
     };
 
     return (
@@ -17,27 +30,30 @@ const SearchProduct = () => {
             <Form>
                 <Form.Group className='d-flex' controlId="search">
                     <Form.Control
-                        type="text"
-                        value={searchTerm}
-                        onChange={handleSearch}
+                        type='text' value={searched} onChange={handleChange}
                         placeholder="Search for a product"
                     />
-                    <Button variant="primary" type="submit" className='ml-2'>
-                        Search
-                    </Button>
                 </Form.Group>
             </Form>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <ListGroup>
-                    {searchResults.map((result, index) => (
-                        <ListGroup.Item key={index}>{result.name}</ListGroup.Item>
-                    ))}
-                </ListGroup>
-            )}
+
+            {productsList && !!productsList.length && deferredValue && <ListGroup>
+                {productsList.map((result, index) => (
+                    <ListGroup.Item key={result.name}>
+                        <Row>
+                            <Col xs={2}>
+                                <Image src={result.image} alt={result.name} width={50} height={50} />
+                            </Col>
+                            <Col xs={7}>
+                                <h5>{result.name}</h5>
+                                <p>Price: ${result.price}</p>
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
+            }
         </div>
     );
-};
+}
 
-export default SearchProduct;
+export default Search;

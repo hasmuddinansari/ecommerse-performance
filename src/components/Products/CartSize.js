@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import useWebWorker from '../hooks/useWorker';
 
+const sleep = (time) =>
+    new Promise((res) => setTimeout(res, time))
+
+// releasing call stack on between of loop : method 2
+const loopTillSum = async (number) => {
+    let sum = 0;
+    for (let i = 0; i < number; i++) {
+        sum += i;
+        if (i % 1000000 === 0) {
+            await sleep(0);
+        }
+    }
+    return sum;
+}
 
 const CartSize = () => {
-    const allProductsCount = 5000 * 100 * 10000
-    const [response, setResponse] = useState('...')
+    const allProductsCount = 5000 * 100 * 1000 * 5
+    // const [result, setResult] = useState('...')
     const { calculate, result } = useWebWorker()
 
 
     const handleCalculate = () => {
-        setResponse('Calulating....')
+        // loopTillSum(allProductsCount).then(setResult)
         calculate(allProductsCount)
     };
 
