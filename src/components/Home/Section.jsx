@@ -12,13 +12,14 @@ export const Section = ({ name }) => {
 
     const { loading, data: products } = useQuery({
         queryKey: ['products', name],
-        queryFn: () => getProducts(6),
+        queryFn: () => getProducts(8),
         enabled: isVisible,
     })
+
     return (
-        <div className="my-4 w-100 h-100" ref={targetRef}>
+        <div className="my-4 w-100 h-100 px-2 mx-2" ref={targetRef}>
             {loading || !products ? <Loading /> : <>
-                <h1 className='text-center bg-dark text-white py-2 my-5'>{name}</h1>
+                <div className='text-center bg-dark text-white py-2 my-5'>{name}</div>
                 <Row>
                     {products.map((product) => (
                         <Product product={product} key={product.id} />
@@ -29,4 +30,3 @@ export const Section = ({ name }) => {
     );
 };
 
-export default Section;

@@ -22,3 +22,20 @@ export const addInCart = (products) => {
     })
         .then(res => res.json())
 }
+
+export const markAsFavourate = (id, isFavourite) => {
+    try {
+
+        return fetch(`https://fakestoreapi.com/products/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(
+                {
+                    isFavourite
+                }
+            )
+        }).then(res => res.json())
+    } catch (e) {
+        throw e
+    }
+
+}

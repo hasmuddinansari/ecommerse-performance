@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './home.css';
-import Section from './Section';
+import { Section } from './Section';
 
 const SECTIONS = [
     "Top Products",

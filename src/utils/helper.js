@@ -13,3 +13,10 @@ export const checkExecutionTime = async (fn, name) => {
     console.log(`Execution time = ${name}`, time)
     return res
 }
+
+export const logger = (data) => console.log('Logger', data)
+
+
+export const keysTill = (n) => {
+    return [...Array(n).keys()].map((item => item))
+}

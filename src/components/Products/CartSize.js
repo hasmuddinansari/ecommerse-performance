@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import useWebWorker from '../hooks/useWorker';
+import { useWebWorker } from '../hooks/useWorker';
 
 const sleep = (time) =>
     new Promise((res) => setTimeout(res, time))

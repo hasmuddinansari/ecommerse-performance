@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { Product } from './Product';
 // import Time from '../Time';
 import { getProducts } from '../../service/products';
@@ -27,19 +27,14 @@ const Products = () => {
     }
 
     return (
-        <Container className="my-4">
-            {/* <SearchProduct /> */}
-            {/* <CartSize /> */}
-            {/* <Time /> */}
-            <Container className="my-4">
-                <h1>Products</h1>
-                <Row>
-                    {products.map((product) => (
-                        <Product product={product} key={product.id} />
-                    ))}
-                </Row>
-            </Container>
-        </Container>
+        <div className="my-4 mx-5 px-2">
+            <p>Products</p>
+            <Row>
+                {products.map((product) => (
+                    <Product product={product} key={product.id} />
+                ))}
+            </Row>
+        </div>
     );
 };
 

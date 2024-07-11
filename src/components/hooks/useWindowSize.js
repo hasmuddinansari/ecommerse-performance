@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useOptimistic } from 'react';
 import useThrottle from './useThrottle';
 
 const useWindowSize = () => {

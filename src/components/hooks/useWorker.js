@@ -1,7 +1,7 @@
 // useWebWorker.js
 import { useEffect, useState } from 'react';
 
-const useWebWorker = () => {
+export const useWebWorker = () => {
     const [worker, setWorker] = useState(null);
     const [result, setResult] = useState(null);
 
@@ -27,4 +27,3 @@ const useWebWorker = () => {
     return { calculate, result };
 };
 
-export default useWebWorker;
